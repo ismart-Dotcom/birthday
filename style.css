@@ -1,0 +1,262 @@
+
+
+#hello{
+    background-color: blueviolet;
+    border: 3px solid brown;
+    border-radius: 10px;
+    text-align: center;
+    height: 300px;
+    width: 350px;
+    display: flexbox;
+    padding: 10px ;
+    font-size: larger;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 300px;
+    margin-right: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+}
+#button{
+    text-decoration: none;
+    width: 100px;
+    height: 80px;
+    margin-top: 20px;
+    margin-right: 150px;
+    margin-left: 100px;
+    display: block;
+
+}
+
+#text{
+    text-align: center;
+     font-size: larger;
+     
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= CONTAINER ================= */
+.birthday-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(circle at top, #1a1a2e, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ================= SOUND ILLUSION ================= */
+.sound {
+  position: absolute;
+  top: 12%;
+  display: flex;
+  gap: 6px;
+}
+
+.sound span {
+  width: 6px;
+  height: 10px;
+  background: #48dbfb;
+  border-radius: 5px;
+  opacity: 0;
+  animation: sound-wave 0.8s infinite ease-in-out;
+}
+
+.sound span:nth-child(1) { animation-delay: 0s; }
+.sound span:nth-child(2) { animation-delay: 0.1s; }
+.sound span:nth-child(3) { animation-delay: 0.2s; }
+.sound span:nth-child(4) { animation-delay: 0.3s; }
+
+#celebrate:checked + .birthday-container .sound span {
+  opacity: 1;
+}
+
+@keyframes sound-wave {
+  0% { height: 10px; }
+  50% { height: 35px; }
+  100% { height: 10px; }
+}
+
+/* ================= CAKE ================= */
+.cake {
+  position: relative;
+  width: 350px;
+  height: 220px;
+  animation: idle-breathe 3s ease-in-out infinite;
+}
+
+@keyframes idle-breathe {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* ================= CAKE LAYERS ================= */
+.layer-1,
+.layer-2,
+.layer-3 {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  border-radius: 20px;
+  background-size: 300% 300%;
+  animation: cake-colors 6s infinite alternate;
+  box-shadow: inset 0 -6px rgba(255,255,255,0.25);
+}
+
+.layer-1 { bottom: 0; }
+.layer-2 { bottom: 60px; }
+.layer-3 { bottom: 120px; }
+
+@keyframes cake-colors {
+  0% { background: linear-gradient(45deg, #ff6b6b, #feca57); }
+  50% { background: linear-gradient(45deg, #48dbfb, #5f27cd); }
+  100% { background: linear-gradient(45deg, #1dd1a1, #ff9ff3); }
+}
+
+/* Speed up colors on celebration */
+#celebrate:checked + .birthday-container .layer-1,
+#celebrate:checked + .birthday-container .layer-2,
+#celebrate:checked + .birthday-container .layer-3 {
+  animation-duration: 2s;
+}
+
+/* ================= DRIPPING ICING ================= */
+.layer-3 {
+  overflow: visible;
+}
+
+.layer-3::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  bottom: -18px;
+  width: 80%;
+  height: 30px;
+  background: inherit;
+  border-radius: 0 0 20px 20px;
+  clip-path: polygon(
+    0% 0%,
+    10% 100%,
+    20% 40%,
+    30% 100%,
+    40% 30%,
+    50% 100%,
+    60% 40%,
+    70% 100%,
+    80% 30%,
+    90% 100%,
+    100% 0%
+  );
+  transform: translateY(0);
+}
+
+#celebrate:checked + .birthday-container .layer-3::after {
+  animation: drip-fall 1.4s ease forwards;
+}
+
+@keyframes drip-fall {
+  to { transform: translateY(14px); }
+}
+
+/* ================= CANDLE ================= */
+.candle {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 38px;
+  background: linear-gradient(#48dbfb, #0abde3);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Flame */
+.candle::after {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 18px;
+  background: radial-gradient(circle, #ffd93d, #ff9f43);
+  border-radius: 50%;
+  animation: flame 0.4s infinite alternate;
+}
+
+#celebrate:checked + .birthday-container .candle::after {
+  animation-duration: 0.15s;
+}
+
+@keyframes flame {
+  from { transform: translateX(-50%) scale(1); opacity: 0.9; }
+  to { transform: translateX(-50%) scale(1.3); opacity: 1; }
+}
+
+/* ================= CONFETTI ================= */
+.confetti i {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  border-radius: 2px;
+}
+
+.confetti i:nth-child(1) { left: 20%; background: #feca57; --dx: -120px; }
+.confetti i:nth-child(2) { left: 40%; background: #ff6b6b; --dx: -60px; }
+.confetti i:nth-child(3) { left: 50%; background: #48dbfb; --dx: 0; }
+.confetti i:nth-child(4) { left: 60%; background: #54a0ff; --dx: 60px; }
+.confetti i:nth-child(5) { left: 80%; background: #5f27cd; --dx: 120px; }
+
+#celebrate:checked + .birthday-container .confetti i {
+  animation: confetti-pop 1.2s ease-out forwards;
+}
+
+@keyframes confetti-pop {
+  to {
+    transform: translate(var(--dx), -220px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ================= POPPING TEXT ================= */
+.birthday-text {
+  position: absolute;
+  bottom: 8%;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(40px) scale(0.3);
+  text-shadow: 0 0 25px #ff9ff3;
+}
+
+#celebrate:checked + .birthday-container .birthday-text {
+  animation: pop-text 0.9s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+}
+
+@keyframes pop-text {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.3);
+  }
+  70% {
+    transform: translateY(-10px) scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
